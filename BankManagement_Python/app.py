@@ -243,9 +243,11 @@ def main():
     args = option_parser.parse_args()
 
     if args.gui:
+        print("Starting up GUI. Navigate to: localhost:5000")
         server = WSGIServer(("", 5000), app)
         server.serve_forever()
     else:
+        print("Starting up CLI.")
         run_cli()
 
 
