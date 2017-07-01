@@ -150,7 +150,7 @@ class BankManager(object):
         if amount > 0:
             account.deposit(amount)
             self.create_transaction(account, account.get_balance(), "DEPOSIT")
-            return (True, "Success! Your balance is now %s" % str(balance))
+            return (True, "Success! Your balance is now %s" % str(account.get_balance()))
 
         return (False, "Invalid amount of funds. Try again.")
 

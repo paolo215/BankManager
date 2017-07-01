@@ -1,6 +1,6 @@
 # User-specific stuff:
-Python/.idea/
-Python/__pycache__/
-Python/*.pyc
+BankManagement_Python/.idea/
+BankManagement_Python/__pycache__/
+BankManagement_Python/*.pyc
 
 

@@ -122,15 +122,44 @@ def dashboard():
 def dashboard_cli(username):
     account = bank_manager.get_user_account(username)
     account_info = account.get_data()
+    print("==== Dashboard ====")
     print("Username: " + account_info["username"])
     print("First name: " + account_info["first_name"])
     print("Last name: " + account_info["last_name"])
     print("Address: " + account_info["address"])
 
+    answer = dashboard_cli_menu()
+    if answer == 1 or answer == 2:
+        if answer == 1:
+            print("\n==== Withdraw ====")
+        elif answer == 2:
+            print("\n==== Deposit ====")
+        amount = required_number_cli("Enter a number: ")
+
+        response = None
+        if answer == 1:
+            response = bank_manager.withdraw(username, amount)
+        elif answer == 2:
+            response = bank_manager.deposit(username, amount)
+
+        is_successful = response[0]
+        message = response[1]
+        print(message)
+    elif answer == 3:
+        history = account_info["history"]
+        print("\n\n ==== Transaction history ====\n")
+        for transaction in history:
+            print(transaction)
+
+        print("\n")
+    elif answer == 4:
+        return None
+
+    return dashboard_cli(username)
 
 def dashboard_cli_menu():
     answer = None
-    while not answer and (answer <= 0 or answer >= 3):
+    while not answer and (answer <= 0 or answer > 4):
         print("""Choose what to do:
         1.) Withdraw
         2.) Deposit
@@ -138,6 +167,7 @@ def dashboard_cli_menu():
         4.) Exit
         """)
         answer = int(input("Enter a number: "))
+    return answer
 
 def run_cli():
 
@@ -156,9 +186,9 @@ def run_cli():
 
         response = bank_manager.create_account(username, password, first_name, last_name, address)
         is_successful = response[0]
-        error = response[1]
+        message = response[1]
 
-        print(error + "\n")
+        print(message + "\n")
         if not is_successful:
             return run_cli()
     elif answer == 2:
@@ -167,9 +197,9 @@ def run_cli():
 
         response = bank_manager.authenticate_user(username, password)
         is_successful = response[0]
-        error = response[1]
+        message = response[1]
 
-        print(error + "\n")
+        print(message + "\n")
         if not is_successful:
             return run_cli()
 
@@ -186,6 +216,13 @@ def required_input_cli(message):
         user_input = raw_input(message)
 
     return user_input
+
+def required_number_cli(message):
+    user_input = ""
+    while not user_input.isdigit():
+        user_input = raw_input(message)
+
+    return float(user_input)
 
 def main_menu_cli():
     answer = None
