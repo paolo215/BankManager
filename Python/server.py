@@ -80,10 +80,10 @@ def dashboard():
             response = None
 
             if option == "Withdraw":
-                # Attempts to withdraw money to the user's account
+                # Attempts to withdraw money from the user's account
                 response = bank_manager.withdraw(username, amount)
             elif option == "Deposit":
-                # Attemps to deposit money to the user's account
+                # Attempts to deposit money to the user's account
                 response = bank_manager.deposit(username, amount)
 
             # Obtain output message
