@@ -47,7 +47,7 @@ class BankManager(object):
 
         # Check if username doesn't exist
         if not username in self.account_data:
-            return (False, "Username does not exists", None)
+            return (False, "Incorrect credentials. Try again.")
 
 
         # Obtain this account information
@@ -55,11 +55,11 @@ class BankManager(object):
 
         # Check if credentials matches what we have
         if account.username == username and account.password == password:
-            return (True, "Success!", account)
+            return (True, "Success!")
 
 
         # Reaching this point means that the user enters incorrect credentials.
-        return (False, "Incorrect credentials. Try again.", None)
+        return (False, "Incorrect credentials. Try again.")
 
 
     def get_user_account(self, username):
@@ -68,8 +68,14 @@ class BankManager(object):
         :param username: username
         :return:
         """
+        if not username in self.account_data:
+            return None
         return self.account_data[username]
 
+    def check_account_exists(self, username):
+        if not username in self.account_data:
+            return False
+        return True
 
     def create_transaction(self, account, amount, status):
         """
@@ -118,9 +124,9 @@ class BankManager(object):
         # avoid unnecessary transactions.
         if balance >= amount and amount > 0:
 
-            # Create a transaction and then withdraw
-            self.create_transaction(account, amount, "WITHDRAW")
+            # Withdraw and record transaction
             account.withdraw(amount)
+            self.create_transaction(account, account.get_balance(), "WITHDRAW")
 
             # Transaction complete.
             return (True, "Success! Your balance is now: %s" % str(account.get_balance()))
@@ -142,8 +148,8 @@ class BankManager(object):
 
         # Check if the amount of money being added is greater than 0.
         if amount > 0:
-            self.create_transaction(account, amount, "DEPOSIT")
             account.deposit(amount)
+            self.create_transaction(account, account.get_balance(), "DEPOSIT")
             return (True, "Success! Your balance is now %s" % str(balance))
 
         return (False, "Invalid amount of funds. Try again.")
