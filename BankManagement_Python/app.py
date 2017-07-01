@@ -3,12 +3,14 @@ from flask import render_template
 from flask import redirect
 from flask import url_for
 from flask import request
+from flask import session
 from argparse import ArgumentParser
 from BankManager import BankManager
 from gevent.wsgi import WSGIServer
 
 # Instantiate Flask
 app = Flask(__name__)
+app.secret_key = "secret key!"
 
 # Instantiate BankManager
 bank_manager = BankManager()
@@ -33,6 +35,11 @@ def login():
     """
 
     error = None
+
+    if session.get("is_authenticated"):
+        print(session)
+        return redirect(url_for("dashboard"))
+
     try:
 
         # Obtain username and password when the user clicks the log in button
@@ -49,9 +56,11 @@ def login():
             if is_successful == False:
                 return render_template("login.html", error=error)
 
+            session["is_authenticated"] = True
+            session["username"] = username
 
             # Redirect to the dashboard if login is successful
-            return redirect(url_for("dashboard", username=username))
+            return redirect(url_for("dashboard"))
 
     except Exception as e:
         error = e
@@ -92,7 +101,7 @@ def dashboard():
     :return:
     """
     error = None
-    username = request.args["username"]
+    username = session.get("username")
 
     # Obtain account information
     account = bank_manager.get_user_account(username)
@@ -117,7 +126,15 @@ def dashboard():
             return render_template("dashboard.html", user_data=account.get_data(), message=message)
     except Exception as e:
         error = e
+
+
     return render_template("dashboard.html", user_data=account.get_data(), message=error)
+
+
+@app.route("/logout")
+def logout():
+    session["is_authenticated"] = False
+    return index()
 
 def dashboard_cli(username):
     account = bank_manager.get_user_account(username)
