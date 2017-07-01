@@ -123,7 +123,7 @@ class BankManager(object):
             account.withdraw(amount)
 
             # Transaction complete.
-            return (True, "Success! Your balance is now: %s" % str(balance))
+            return (True, "Success! Your balance is now: %s" % str(account.get_balance()))
 
         return (False, "Insufficient amount of funds. Your balance is currently %s" % str(balance))
 
