@@ -33,6 +33,16 @@
     {% for transaction in user_data.history %}
         transaction id: {{transaction.transaction_id}}
         <br>
+        account id: {{transaction.account_id}}
+        <br>
+        balance: {{transaction.balance}}
+        <br>
+        amount: {{transaction.amount}}
+        <br>
+        status: {{transaction.status}}
+        <br>
+        date: {{transaction.get_readable_date()}}
+        <br><br><br>
     {% endfor %}
 
 
