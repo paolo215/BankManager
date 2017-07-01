@@ -144,6 +144,7 @@ def dashboard_cli(username):
     print("First name: " + account_info["first_name"])
     print("Last name: " + account_info["last_name"])
     print("Address: " + account_info["address"])
+    print("Balance: " + str(account_info["balance"]))
 
     answer = dashboard_cli_menu()
     if answer == 1 or answer == 2:
@@ -170,6 +171,7 @@ def dashboard_cli(username):
 
         print("\n")
     elif answer == 4:
+        print("Logging out. Have a nice day! :)")
         return None
 
     return dashboard_cli(username)
@@ -183,7 +185,10 @@ def dashboard_cli_menu():
         3.) See history
         4.) Exit
         """)
-        answer = int(input("Enter a number: "))
+        try:
+            answer = int(input("Enter a number: "))
+        except TypeError as e:
+            print("Incorrect option. Try again.")
     return answer
 
 def run_cli():
@@ -243,7 +248,7 @@ def required_number_cli(message):
 
 def main_menu_cli():
     answer = None
-    while not answer and (answer <= 0 or answer > 3):
+    while not answer or answer <= 0 or answer > 3:
         print("""Choose what to do:
         1.) Register
         2.) Log in

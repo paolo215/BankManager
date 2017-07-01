@@ -35,21 +35,7 @@ class Transaction(object):
             + "Balance: " + str(self.balance) + "\n" \
             + "Amount: " + str(self.amount) + "\n" \
             + "Status: " + self.status + "\n" \
-            + "Date: " + str(self.date) + "\n" \
-
-    def get_transaction_info(self):
-        """
-        Returns relevant transaction information
-        :return:
-        """
-        return {
-                "transaction_id": str(self.transaction_id),
-                "account_id": str(self.account_id),
-                "balance": str(self.balance),
-                "amount": str(self.amount),
-                "status": self.status,
-                "date": self.date
-                }
+            + "Date: " + str(self.get_readable_date()) + "\n" \
 
 
 
