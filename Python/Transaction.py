@@ -23,7 +23,7 @@ class Transaction(object):
         Returns human readate format date
         :return:
         """
-        return datetime.datetime.strftime("%B %d, %Y %H:%M%S")
+        return self.date.strftime("%B %d, %Y %H:%M:%S")
 
     def __str__(self):
         """
