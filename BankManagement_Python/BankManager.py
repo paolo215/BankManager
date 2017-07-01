@@ -105,6 +105,7 @@ class BankManager(object):
 
         # Increment next transaction id
         self.next_transaction_id += 1
+        return transaction
 
 
     def withdraw(self, username, amount):
