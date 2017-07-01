@@ -127,7 +127,7 @@ class BankManager(object):
 
             # Withdraw and record transaction
             account.withdraw(amount)
-            self.create_transaction(account, account.get_balance(), "WITHDRAW")
+            self.create_transaction(account, amount, "WITHDRAW")
 
             # Transaction complete.
             return (True, "Success! Your balance is now: %s" % str(account.get_balance()))
@@ -150,7 +150,7 @@ class BankManager(object):
         # Check if the amount of money being added is greater than 0.
         if amount > 0:
             account.deposit(amount)
-            self.create_transaction(account, account.get_balance(), "DEPOSIT")
+            self.create_transaction(account, amount, "DEPOSIT")
             return (True, "Success! Your balance is now %s" % str(account.get_balance()))
 
         return (False, "Invalid amount of funds. Try again.")
