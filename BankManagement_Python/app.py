@@ -22,7 +22,7 @@ bank_manager.create_account("admin", "password", "Paolo", "Villanueva", "My addr
 def index():
     """
     Renders index.html when the user accesses main website or index.html
-    :return:
+    :return: Renders index.html
     """
     return render_template("index.html")
 
@@ -31,17 +31,16 @@ def index():
 def login():
     """
     Renders the login page so the user can access their bank account
-    :return:
+    :return: Renders login.html or redirect user to dashboard if user has been authenticated
     """
 
     error = None
 
+    # Check if user has been authenticated. If so, redirect user to the dashboard
     if session.get("is_authenticated"):
-        print(session)
         return redirect(url_for("dashboard"))
 
     try:
-
         # Obtain username and password when the user clicks the log in button
         if request.method == "POST":
             username = request.form["username"]
@@ -56,6 +55,9 @@ def login():
             if is_successful == False:
                 return render_template("login.html", error=error)
 
+            # Store relevant information to use when user is in the dashboard
+            # session allows to store information by using cookies.
+            # It uses secret key above to encrypt it
             session["is_authenticated"] = True
             session["username"] = username
 
@@ -70,7 +72,16 @@ def login():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    """
+    Renders the registration page so the user can create an account
+    :return: Renders register.html or redirect user to the dashboard
+    """
     error = None
+
+    # Check if user has been authenticated. If so, redirect user to the dashboard
+    if session.get("is_authenticated"):
+        return redirect(url_for("dashboard"))
+
     try:
         if request.method == "POST":
             username = request.form["username"]
@@ -135,6 +146,9 @@ def dashboard():
 def logout():
     session["is_authenticated"] = False
     return index()
+
+
+# ======== Functions for command line interface ======
 
 def dashboard_cli(username):
     account = bank_manager.get_user_account(username)
@@ -257,6 +271,9 @@ def main_menu_cli():
         answer = int(input("Enter a number: "))
 
     return answer
+
+
+# ==== Main =====
 
 def main():
     option_parser = ArgumentParser()
