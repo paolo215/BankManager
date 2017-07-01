@@ -34,7 +34,7 @@ def login():
     error = None
     try:
 
-        # Retrive username and password when the user clicks the log in button
+        # Obtain username and password when the user clicks the log in button
         if request.method == "POST":
             username = request.form["username"]
             password = request.form["password"]
@@ -68,11 +68,11 @@ def dashboard():
     error = None
     username = request.args["username"]
 
-    # Retrive account information
+    # Obtain account information
     account = bank_manager.get_user_account(username)
 
     try:
-        # This is True when user clicks "Complete transaction" button
+        # This is true when user clicks "Complete transaction" button
         if request.method == "POST":
             # Obtain option (withdraw or deposit) and amount
             option = request.form["option"]

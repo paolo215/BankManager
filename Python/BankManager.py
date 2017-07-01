@@ -74,9 +74,9 @@ class BankManager(object):
     def create_transaction(self, account, amount, status):
         """
         Creates a safe transaction (creates a transaction after validating the
-        amount of money drawn/added and balance
+        amount of money withdrawn/added and balance
         :param account: Bank account information
-        :param amount: Amount of money being drawn/added
+        :param amount: Amount of money being withdrawn/added
         :param status: WITHDRAW or DEPOSIT
         :return:
         """
