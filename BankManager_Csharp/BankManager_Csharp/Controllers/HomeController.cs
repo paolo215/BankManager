@@ -11,6 +11,7 @@ namespace BankManager_Csharp.Controllers
         // GET: Home
         public ActionResult Index()
         {
+
             return View();
         }
     }

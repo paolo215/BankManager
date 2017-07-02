@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BankManager_Csharp.Models;
 
 namespace BankManager_Csharp.Controllers
 {
@@ -11,16 +12,49 @@ namespace BankManager_Csharp.Controllers
         // GET: Login
         public ActionResult Index()
         {
-            System.Diagnostics.Debug.WriteLine("a");
             return View();
         }
 
+
         [HttpPost]
-        public ActionResult Authorize()
+        public ActionResult Authorize(String username, String password)
         {
-            System.Diagnostics.Debug.WriteLine("yay");
-         
+
+            try
+            {
+                Response response = AuthenticateUser(username, password);
+                System.Diagnostics.Debug.WriteLine(response.message);
+                if (response.isSuccessful == false)
+                {
+                    return View("Index", response);
+                }
+            }
+
+        
+            catch(Exception e)
+            {
+
+            }
+
             return View();
+        }
+
+
+        public Response AuthenticateUser(String username, String password)
+        {
+            if (MvcApplication.accountData.ContainsKey(username) == false)
+            {
+                return new Response(false, "Incorrect credentials. Try again.");
+            }
+
+            Account account = MvcApplication.accountData[username];
+
+            if(account.getPassword() == password)
+            {
+                return new Response(true, "Success!");
+            }
+
+            return new Response(false, "Incorrect credentials. Try again.");
         }
 
     }

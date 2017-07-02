@@ -47,7 +47,35 @@ namespace BankManager_Csharp.Models
             history.Add(transaction);
         }
 
-        
+        public int getAccountId()
+        {
+            return accountId;
+        }
+
+        public String getUsername()
+        {
+            return username;
+        }
+
+        public String getPassword()
+        {
+            return password;
+        }
+
+        public String getFirstName()
+        {
+            return firstName;
+        }
+
+        public String getLastName()
+        {
+            return lastName;
+        }
+
+        public String getAddress()
+        {
+            return address;
+        }
 
     }
 }
