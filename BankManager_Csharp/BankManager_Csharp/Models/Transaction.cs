@@ -7,12 +7,12 @@ namespace BankManager_Csharp.Models
 {
     public class Transaction
     {
-        private int transactionId { get; }
-        private int accountId { get; }
-        private int balance { get; }
-        private int amount { get; }
-        private String status { get; }
-        private DateTime date { get; }
+        public int transactionId { get; }
+        public int accountId { get; }
+        public int balance { get; }
+        public int amount { get; }
+        public String status { get; }
+        public DateTime date { get; }
 
         public Transaction(int transactionId, int accountId, int balance,
             int amount, String status, DateTime date)

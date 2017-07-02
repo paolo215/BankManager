@@ -19,6 +19,8 @@ namespace BankManager_Csharp
         protected void Application_Start()
         {
             Account account = new Account(1, "admin", "password", "Paolo", "Villanueva", "My Address");
+            Transaction transaction = new Transaction(1, 1, 100, 100, "WITHDRAW", DateTime.Now);
+            account.addTransaction(transaction);
             accountData["admin"] = account;
 
             AreaRegistration.RegisterAllAreas();

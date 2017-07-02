@@ -8,14 +8,14 @@ namespace BankManager_Csharp.Models
 {
     public class Account
     {
-        private int accountId { get; }
-        private String username { get; }
-        private String password { get; }
-        private String firstName { get; }
-        private String lastName { get;  }
-        private String address { get;  }
-        private int balance { get; set; }
-        private ArrayList history { get; }
+        public int accountId { get; }
+        public String username { get; }
+        public String password { get; }
+        public String firstName { get; }
+        public String lastName { get;  }
+        public String address { get;  }
+        public int balance { get; set; }
+        public ArrayList history { get; }
 
         public Account(int accountId, String username, String password,
             String firstName, String lastName, String address)
@@ -47,35 +47,20 @@ namespace BankManager_Csharp.Models
             history.Add(transaction);
         }
 
-        public int getAccountId()
-        {
-            return accountId;
-        }
-
-        public String getUsername()
-        {
-            return username;
-        }
 
         public String getPassword()
         {
             return password;
         }
 
-        public String getFirstName()
+
+        public ArrayList getHistory()
         {
-            return firstName;
+            return history;
         }
 
-        public String getLastName()
-        {
-            return lastName;
-        }
 
-        public String getAddress()
-        {
-            return address;
-        }
+        
 
     }
 }
