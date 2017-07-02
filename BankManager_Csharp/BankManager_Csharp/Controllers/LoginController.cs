@@ -19,7 +19,7 @@ namespace BankManager_Csharp.Controllers
         [HttpPost]
         public ActionResult Authorize(String username, String password)
         {
-
+            String error = "";
             try
             {
                 Response response = AuthenticateUser(username, password);
@@ -28,15 +28,19 @@ namespace BankManager_Csharp.Controllers
                 {
                     return View("Index", response);
                 }
+
+
+                Session["username"] = username;
+                Session["is_authenticated"] = true;
+                return RedirectToAction("Index", "Dashboard");
             }
 
-        
-            catch(Exception e)
+            catch (Exception e)
             {
-
+                error = e.ToString();
             }
 
-            return View();
+            return View("Index", new Response(false, error));
         }
 
 

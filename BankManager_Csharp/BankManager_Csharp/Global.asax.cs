@@ -18,6 +18,9 @@ namespace BankManager_Csharp
 
         protected void Application_Start()
         {
+            Account account = new Account(1, "admin", "password", "Paolo", "Villanueva", "My Address");
+            accountData["admin"] = account;
+
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
