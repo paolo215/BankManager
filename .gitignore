@@ -1,6 +1,13 @@
+
 *swp
+
+# Python
 *pyc
 BankManagement_Python/.idea/
 BankManagement_Python/__pycache__/
 
-
+# C#
+*.user
+*.suo
+**/packages/*
+BankManager_Csharp/BankManager_Csharp/obj
