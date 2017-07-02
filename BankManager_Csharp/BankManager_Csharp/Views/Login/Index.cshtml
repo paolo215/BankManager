@@ -1,0 +1,23 @@
+﻿@model BankManager_Csharp.Models.Login
+@{
+    ViewBag.Title = "Index";
+}
+<!DOCTYPE html>
+
+
+
+@using (@Html.BeginForm("Authorize", "Login", FormMethod.Post))
+{
+    @Html.LabelFor(user => user.username)
+    @Html.EditorFor(user => user.username)
+    
+    @Html.LabelFor(user => user.password)
+    @Html.PasswordFor(user => user.password)
+
+    <input type="submit" value="Login" />
+}
+
+
+</html>
+
+
