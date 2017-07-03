@@ -27,6 +27,13 @@ namespace BankManager_Csharp.Controllers
             return View("Index", new Dashboard(account, null));
         }
 
+        public ActionResult Logout()
+        {
+            Session.Abandon();
+            return RedirectToAction("Index", "Home");
+        }
+
+
         [HttpPost]
         public ActionResult MakeTransaction(int amount, String option)
         {
