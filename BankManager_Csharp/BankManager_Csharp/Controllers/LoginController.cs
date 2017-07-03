@@ -12,6 +12,11 @@ namespace BankManager_Csharp.Controllers
         // GET: Login
         public ActionResult Index()
         {
+            if(Session["username"] != null && Session["is_authenticated"] != null)
+            {
+                return RedirectToAction("Index", "Dashboard");
+            }
+
             return View();
         }
 

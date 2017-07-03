@@ -1,4 +1,4 @@
-﻿@model BankManager_Csharp.Models.Dashboard
+﻿@model BankManager_Csharp.Models.AccountResponse
 @{
     ViewBag.Title = "Dashboard";
 }
@@ -40,6 +40,9 @@ Balance: @Html.DisplayFor(model => model.account.balance)
 @foreach (BankManager_Csharp.Models.Transaction transaction in Model.account.history)
 {
     @Html.Raw("<br><br>")
+    @Html.Raw("Transaction id: ")
+    @Html.DisplayFor(_transaction => transaction.transactionId);
+    @Html.Raw("<br>");
     @Html.Raw("Account id: ")
     @Html.DisplayFor(_transaction => transaction.accountId);
     @Html.Raw("<br>");

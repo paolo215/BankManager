@@ -24,7 +24,7 @@ namespace BankManager_Csharp.Controllers
             Account account = MvcApplication.accountData[username.ToString()];
             
 
-            return View("Index", new Dashboard(account, null));
+            return View("Index", new AccountResponse(account, null));
         }
 
         public ActionResult Logout()
@@ -50,7 +50,7 @@ namespace BankManager_Csharp.Controllers
             }
 
 
-            return View("Index", new Dashboard(account, response));
+            return View("Index", new AccountResponse(account, response));
         }
 
 
