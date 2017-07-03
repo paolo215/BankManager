@@ -1,4 +1,4 @@
-﻿@model BankManager_Csharp.Models.Account
+﻿@model BankManager_Csharp.Models.Dashboard
 @{
     ViewBag.Title = "Dashboard";
 }
@@ -6,15 +6,15 @@
 <h2>Dashboard</h2>
 
 <br />
-Username: @Html.DisplayFor(model => model.accountId)
+Username: @Html.DisplayFor(model => model.account.accountId)
 <br />
-First name: @Html.DisplayFor(model => model.firstName)
+First name: @Html.DisplayFor(model => model.account.firstName)
 <br />
-Last name: @Html.DisplayFor(model => model.lastName)
+Last name: @Html.DisplayFor(model => model.account.lastName)
 <br />
-Address: @Html.DisplayFor(model => model.address)
+Address: @Html.DisplayFor(model => model.account.address)
 <br />
-Balance: @Html.DisplayFor(model => model.balance)
+Balance: @Html.DisplayFor(model => model.account.balance)
 <br />
 
 
@@ -29,7 +29,13 @@ Balance: @Html.DisplayFor(model => model.balance)
 </form>
 <br>
 
-@foreach (BankManager_Csharp.Models.Transaction transaction in Model.history)
+@if (Model.response != null)
+{
+    @Html.DisplayFor(model => model.response.message)
+}
+
+
+@foreach (BankManager_Csharp.Models.Transaction transaction in Model.account.history)
 {
     @Html.Raw("<br><br>")
     @Html.Raw("Account id: ")
@@ -48,3 +54,5 @@ Balance: @Html.DisplayFor(model => model.balance)
     @Html.DisplayFor(_transaction => transaction.date);
     @Html.Raw("<br>");
 }
+
+
