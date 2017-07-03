@@ -11,17 +11,12 @@ namespace BankManager_Csharp
     public class MvcApplication : System.Web.HttpApplication
     {
 
-        public static Dictionary<String, Account> accountData = new Dictionary<String, Account>();
-        public static Dictionary<int, Transaction> transactionData = new Dictionary<int, Transaction>();
-        public static int nextAccountId = 1;
-        public static int nextTransactionId = 1;
+        public static BankManager bankManager = new BankManager();
 
         protected void Application_Start()
         {
             Account account = new Account(1, "admin", "password", "Paolo", "Villanueva", "My Address");
-            Transaction transaction = new Transaction(1, 1, 100, 100, "WITHDRAW", DateTime.Now);
-            account.addTransaction(transaction);
-            accountData["admin"] = account;
+           
 
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);

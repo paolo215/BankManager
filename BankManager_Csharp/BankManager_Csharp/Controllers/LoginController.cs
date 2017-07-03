@@ -27,7 +27,7 @@ namespace BankManager_Csharp.Controllers
             String error = "";
             try
             {
-                Response response = AuthenticateUser(username, password);
+                Response response = MvcApplication.bankManager.authenticateUser(username, password);
                 System.Diagnostics.Debug.WriteLine(response.message);
                 if (response.isSuccessful == false)
                 {
@@ -46,24 +46,6 @@ namespace BankManager_Csharp.Controllers
             }
 
             return View("Index", new Response(false, error));
-        }
-
-
-        public Response AuthenticateUser(String username, String password)
-        {
-            if (MvcApplication.accountData.ContainsKey(username) == false)
-            {
-                return new Response(false, "Incorrect credentials. Try again.");
-            }
-
-            Account account = MvcApplication.accountData[username];
-
-            if(account.getPassword() == password)
-            {
-                return new Response(true, "Success!");
-            }
-
-            return new Response(false, "Incorrect credentials. Try again.");
         }
 
     }

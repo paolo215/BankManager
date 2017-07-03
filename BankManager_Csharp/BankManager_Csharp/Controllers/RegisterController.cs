@@ -25,19 +25,20 @@ namespace BankManager_Csharp.Controllers
         public ActionResult Create(String username, String password, String firstName,
             String lastName, String address)
         {
-            Account account = new Account(MvcApplication.nextAccountId, username, password, firstName, lastName, address);
-            if(MvcApplication.accountData.ContainsKey(username) == false)
+
+            AccountResponse accountResponse = MvcApplication.bankManager.createAccount(username,
+                                        password, firstName, lastName, address);
+
+            if(accountResponse.response.isSuccessful == false)
             {
-                MvcApplication.accountData[username] = account;
-                MvcApplication.nextTransactionId += 1;
-
-                Session["username"] = username;
-                Session["is_authenticated"] = true;
-
-                return RedirectToAction("Index", "Dashboard");
-               
+                System.Diagnostics.Debug.WriteLine("fail");
+                return View("Index", accountResponse);
             }
-            return View("Index", new AccountResponse(account, new Response(false, "Username already exists. Try again.")));
+
+            Session["username"] = username;
+            Session["is_authenticated"] = true;
+
+            return RedirectToAction("Index", "Dashboard");
         }
 
 
