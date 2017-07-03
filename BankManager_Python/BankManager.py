@@ -9,8 +9,6 @@ class BankManager(object):
         """
         self.account_data = {}
         self.transaction_data = {}
-        self.next_account_id = 1
-        self.next_transaction_id = 1
 
     def create_account(self, username, password, first_name, last_name, address):
         """
@@ -27,11 +25,10 @@ class BankManager(object):
         # Check if the username does not exist
         if not username in self.account_data:
 
+            next_account_id = len(self.account_data.keys()) + 1
             # If the account doesn't exist, then we can create a bank account with this username
-            self.account_data[username] = Account(self.next_account_id, username, password, first_name, last_name, address)
+            self.account_data[username] = Account(next_account_id, username, password, first_name, last_name, address)
 
-            # Increate account id
-            self.next_account_id += 1
             return (True, "Account has been successfully created")
 
         # Username already exists. User must enter a different username
@@ -54,7 +51,7 @@ class BankManager(object):
         account = self.account_data[username]
 
         # Check if credentials matches what we have
-        if account.username == username and account.password == password:
+        if account.password == password:
             return (True, "Success!")
 
 
@@ -94,17 +91,16 @@ class BankManager(object):
         # Obtain datetime information so that we know when this transaction happened
         datetime_now = datetime.datetime.now()
 
+        next_transaction_id = len(self.transaction_data.keys()) + 1
         # Create Transaction object
-        transaction = Transaction(self.next_transaction_id, account_id, balance, amount, status, datetime_now)
+        transaction = Transaction(next_transaction_id, account_id, balance, amount, status, datetime_now)
 
         # Record transaction
-        self.transaction_data[self.next_transaction_id] = transaction
+        self.transaction_data[next_transaction_id] = transaction
 
         # Add transaction to account's history
         account.add_transaction(transaction)
 
-        # Increment next transaction id
-        self.next_transaction_id += 1
         return transaction
 
 
