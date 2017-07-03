@@ -17,7 +17,7 @@ namespace BankManager_Csharp.Controllers
                 return RedirectToAction("Index", "Dashboard");
             }
 
-            return View();
+            return View("Index", null);
         }
 
 
@@ -31,8 +31,11 @@ namespace BankManager_Csharp.Controllers
 
             if(accountResponse.response.isSuccessful == false)
             {
-                System.Diagnostics.Debug.WriteLine("fail");
-                return View("Index", accountResponse);
+                TempData["username"] = username;
+                TempData["firstName"] = firstName;
+                TempData["lastName"] = lastName;
+                TempData["address"] = address;
+                return View("Index", accountResponse.response);
             }
 
             Session["username"] = username;

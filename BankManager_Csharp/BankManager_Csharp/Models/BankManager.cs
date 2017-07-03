@@ -19,17 +19,20 @@ namespace BankManager_Csharp.Models
         public AccountResponse createAccount(String username, String password, 
             String firstName, String lastName, String address)
         {
-            int accountId = accountData.Count + 1;
-            Account account = new Account(accountId, username, password, firstName, lastName, address);
 
+            Account account = null;
             if (accountData.ContainsKey(username) == false)
             {
+                int accountId = accountData.Count + 1;
+                account = new Account(accountId, username, password, firstName, lastName, address);
                 accountData[username] = account;
-
+                
 
                 return new AccountResponse(account, new Response(true, "Success! A new account has been created."));
 
             }
+
+            account = new Account(-1, username, null, firstName, lastName, address);
             return new AccountResponse(account, new Response(false, "Username already exists. Try again."));
         }
 
