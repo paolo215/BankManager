@@ -151,8 +151,17 @@ def logout():
 # ======== Functions for command line interface ======
 
 def dashboard_cli(username):
+    """
+    Main menu for command line interface dashboard
+    :param username:
+    :return:
+    """
+
+    # Obtain user info
     account = bank_manager.get_user_account(username)
     account_info = account.get_data()
+
+    # Show user info
     print("==== Dashboard ====")
     print("Username: " + account_info["username"])
     print("First name: " + account_info["first_name"])
@@ -160,7 +169,10 @@ def dashboard_cli(username):
     print("Address: " + account_info["address"])
     print("Balance: " + str(account_info["balance"]))
 
+    # Show menu and let user decide what to do (withdraw, deposit, or exit)
     answer = dashboard_cli_menu()
+
+    # User wants to create a transaction. (1 for withdraw and 2 for deposit)
     if answer == 1 or answer == 2:
         if answer == 1:
             print("\n==== Withdraw ====")
@@ -174,9 +186,10 @@ def dashboard_cli(username):
         elif answer == 2:
             response = bank_manager.deposit(username, amount)
 
-        is_successful = response[0]
         message = response[1]
         print(message)
+
+    # User wants to show transaction history
     elif answer == 3:
         history = account_info["history"]
         print("\n\n ==== Transaction history ====\n")
@@ -184,6 +197,7 @@ def dashboard_cli(username):
             print(transaction)
 
         print("\n")
+    # User wants to log out
     elif answer == 4:
         print("Logging out. Have a nice day! :)")
         return None
@@ -191,6 +205,10 @@ def dashboard_cli(username):
     return dashboard_cli(username)
 
 def dashboard_cli_menu():
+    """
+    Show dashboard menu and handles user input
+    :return:
+    """
     answer = None
     while not answer and (answer <= 0 or answer > 4):
         print("""Choose what to do:
@@ -206,11 +224,23 @@ def dashboard_cli_menu():
     return answer
 
 def run_cli():
+    """
+    Run command line interface for bank management
+    :return:
+    """
 
+    # Show main menu and handle user input
     answer = main_menu_cli()
     username = None
+
+    # User wants to create an account
     if answer == 1:
+        # Prompts the user to enter username, password, first name, last name
+        # and home address
         username = required_input_cli("Enter your username: ")
+
+        # Prompts the user to enter a different username if username
+        # already exists
         while bank_manager.check_account_exists(username):
             print("Account already exists. Please choose a different username.")
             username = required_input_cli("Enter your username: ")
@@ -220,26 +250,35 @@ def run_cli():
         last_name = required_input_cli("Enter your last name: ")
         address = required_input_cli("Enter your address: ")
 
+        # Attempts to create a bank account
         response = bank_manager.create_account(username, password, first_name, last_name, address)
         is_successful = response[0]
         message = response[1]
 
+        # Print message
         print(message + "\n")
+
+        # If account creation is not successful, call this function again.
         if not is_successful:
             return run_cli()
+    # User wants to log in
     elif answer == 2:
+        # Prompts the user to enter their username and password to log in
         username = required_input_cli("Enter your username: ")
         password = required_input_cli("Enter your password: ")
 
+        # Authenticate credentials
         response = bank_manager.authenticate_user(username, password)
         is_successful = response[0]
         message = response[1]
 
         print(message + "\n")
+
+        # Call this function again, if log in is unsuccessful
         if not is_successful:
             return run_cli()
 
-
+    # User wants to exit the application
     elif answer == 3:
         print("Have a great day! :)")
         return None
@@ -247,6 +286,11 @@ def run_cli():
     return dashboard_cli(username)
 
 def required_input_cli(message):
+    """
+    Asks the user for input
+    :param message:
+    :return:
+    """
     user_input = None
     while not user_input:
         user_input = raw_input(message)
@@ -254,6 +298,11 @@ def required_input_cli(message):
     return user_input
 
 def required_number_cli(message):
+    """
+    Asks the user to enter a valid number
+    :param message:
+    :return:
+    """
     user_input = ""
     while not user_input.isdigit():
         user_input = raw_input(message)
@@ -261,6 +310,10 @@ def required_number_cli(message):
     return float(user_input)
 
 def main_menu_cli():
+    """
+    Main menu for command line interface
+    :return:
+    """
     answer = None
     while not answer or answer <= 0 or answer > 3:
         print("""Choose what to do:
