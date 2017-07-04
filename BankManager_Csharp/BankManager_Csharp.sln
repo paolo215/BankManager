@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankManager_Csharp", "BankManager_Csharp\BankManager_Csharp.csproj", "{179E123D-D807-4800-908C-FD17D7E2F693}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankManager_Csharp_MVC_GUI", "BankManager_Csharp\BankManager_Csharp_MVC_GUI.csproj", "{179E123D-D807-4800-908C-FD17D7E2F693}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankManager_Csharp_CLI", "BankManager_Csharp_CLI\BankManager_Csharp_CLI.csproj", "{1CDA95C1-E8B9-41CD-8F3F-6A5C0281AF5D}"
 EndProject

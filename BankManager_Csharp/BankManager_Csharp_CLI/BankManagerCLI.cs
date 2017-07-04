@@ -115,8 +115,6 @@ namespace BankManager_Csharp_CLI
             else if(answer == 4)
             {
                 Console.WriteLine("Logging out. Have a nice day! :)");
-                Console.WriteLine("Press Enter to exit.");
-                Console.ReadLine();
                 return;
             }
 
