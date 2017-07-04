@@ -44,7 +44,7 @@ class BankManager(object):
 
         # Check if username doesn't exist
         if not username in self.account_data:
-            return (False, "Incorrect credentials. Try again.")
+            return (False, "Incorrect username or password. Try again.")
 
 
         # Obtain this account information
@@ -56,7 +56,7 @@ class BankManager(object):
 
 
         # Reaching this point means that the user enters incorrect credentials.
-        return (False, "Incorrect credentials. Try again.")
+        return (False, "Incorrect username or password. Try again.")
 
 
     def get_user_account(self, username):
