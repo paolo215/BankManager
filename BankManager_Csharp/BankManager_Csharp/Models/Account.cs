@@ -8,15 +8,27 @@ namespace BankManager_Csharp.Models
 {
     public class Account
     {
+        
         public int accountId { get; }
         public String username { get; }
         public String password { get; }
         public String firstName { get; }
-        public String lastName { get;  }
-        public String address { get;  }
-        public int balance { get; set; }
+        public String lastName { get; }
+        public String address { get; }
+        public float balance { get; set; }
         public List<Transaction> history { get; }
 
+
+        /// <summary>
+        /// Instantiates Account object. This represents a bank account
+        /// for the user.
+        /// </summary>
+        /// <param name="accountId"></param>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="address"></param>
         public Account(int accountId, String username, String password,
             String firstName, String lastName, String address)
         {
@@ -30,13 +42,19 @@ namespace BankManager_Csharp.Models
             this.history = new List<Transaction>();
         }
 
-        public int withdraw(int amount)
+
+        /// <summary>
+        /// Withdraws money from this account
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <returns></returns>
+        public float withdraw(float amount)
         {
             balance -= amount;
             return balance;
         }
 
-        public int deposit(int amount)
+        public float deposit(float amount)
         {
             balance += amount;
             return balance;
@@ -47,9 +65,6 @@ namespace BankManager_Csharp.Models
             history.Add(transaction);
         }
 
-
-
-        
 
     }
 }
