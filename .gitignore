@@ -1,0 +1,16 @@
+
+*swp
+
+# Python
+*pyc
+.idea/
+__pycache__/
+
+# C#
+*.user
+*.suo
+packages/
+obj/
+*.exe
+Scripts/
+fonts/

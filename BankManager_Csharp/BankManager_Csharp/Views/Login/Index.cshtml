@@ -1,0 +1,22 @@
+﻿@model BankManager_Csharp.Models.Response
+@{
+    ViewBag.Title = "Index";
+}
+<!DOCTYPE html>
+
+
+
+<form action="/Login/Authorize" method="post">
+    Username:<input name="username" type="text" />
+    <br />
+    Password:<input name="password" type="password"/>
+    <br />
+
+    <input type="submit" value="Log in" />
+</form>
+
+@Html.DisplayFor(model => model.message)
+
+</html>
+
+
