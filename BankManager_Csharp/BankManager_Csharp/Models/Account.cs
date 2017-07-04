@@ -54,12 +54,21 @@ namespace BankManager_Csharp.Models
             return balance;
         }
 
+        /// <summary>
+        /// Deposits money from this account
+        /// </summary>
+        /// <param name="amount"></param>
+        /// <returns></returns>
         public float deposit(float amount)
         {
             balance += amount;
             return balance;
         }
 
+        /// <summary>
+        /// Records previous transactions.
+        /// </summary>
+        /// <param name="transaction"></param>
         public void addTransaction(Transaction transaction)
         {
             history.Add(transaction);
