@@ -11,6 +11,7 @@ __pycache__/
 *.suo
 packages/
 obj/
+bin/
 *.exe
 Scripts/
 fonts/
