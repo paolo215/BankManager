@@ -9,5 +9,6 @@ BankManagement_Python/__pycache__/
 # C#
 *.user
 *.suo
-**/packages/*
-BankManager_Csharp/BankManager_Csharp/obj
+packages/
+obj/
+bin/
