@@ -62,6 +62,15 @@ namespace BankManager_Csharp.Models
             return accountData[username];
         }
 
+        public bool checkAccountExists(String username)
+        {
+            if(accountData.ContainsKey(username) == false)
+            {
+                return false;
+            }
+            return true;
+        }
+
 
         public Transaction createTransaction(Account account, int amount, String status)
         {

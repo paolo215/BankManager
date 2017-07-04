@@ -48,17 +48,6 @@ namespace BankManager_Csharp.Models
         }
 
 
-        public String getPassword()
-        {
-            return password;
-        }
-
-
-        public ArrayList getHistory()
-        {
-            return history;
-        }
-
 
         
 
