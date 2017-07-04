@@ -12,9 +12,12 @@ namespace BankManager_Csharp
     {
 
         public static BankManager bankManager = new BankManager();
+        
 
         protected void Application_Start()
         {
+            
+
             bankManager.createAccount("admin", "password", "Paolo", "Villanueva", "My address");
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);

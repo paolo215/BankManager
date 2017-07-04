@@ -1,9 +1,0 @@
-C:\Users\paolo\Google Drive\Bank_Sample\BankManager_Csharp\BankManager_Csharp_CLI\bin\Debug\netcoreapp1.1\BankManager_Csharp_CLI.deps.json
-C:\Users\paolo\Google Drive\Bank_Sample\BankManager_Csharp\BankManager_Csharp_CLI\bin\Debug\netcoreapp1.1\BankManager_Csharp_CLI.runtimeconfig.json
-C:\Users\paolo\Google Drive\Bank_Sample\BankManager_Csharp\BankManager_Csharp_CLI\bin\Debug\netcoreapp1.1\BankManager_Csharp_CLI.runtimeconfig.dev.json
-C:\Users\paolo\Google Drive\Bank_Sample\BankManager_Csharp\BankManager_Csharp_CLI\obj\Debug\netcoreapp1.1\BankManager_Csharp_CLI.AssemblyInfo.cs
-C:\Users\paolo\Google Drive\Bank_Sample\BankManager_Csharp\BankManager_Csharp_CLI\bin\Debug\netcoreapp1.1\BankManager_Csharp_CLI.dll
-C:\Users\paolo\Google Drive\Bank_Sample\BankManager_Csharp\BankManager_Csharp_CLI\bin\Debug\netcoreapp1.1\BankManager_Csharp_CLI.pdb
-C:\Users\paolo\Google Drive\Bank_Sample\BankManager_Csharp\BankManager_Csharp_CLI\obj\Debug\netcoreapp1.1\BankManager_Csharp_CLI.dll
-C:\Users\paolo\Google Drive\Bank_Sample\BankManager_Csharp\BankManager_Csharp_CLI\obj\Debug\netcoreapp1.1\BankManager_Csharp_CLI.pdb
-C:\Users\paolo\Google Drive\Bank_Sample\BankManager_Csharp\BankManager_Csharp_CLI\obj\Debug\netcoreapp1.1\BankManager_Csharp_CLI.csprojResolveAssemblyReference.cache

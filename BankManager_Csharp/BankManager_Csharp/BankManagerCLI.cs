@@ -1,11 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-
 using BankManager_Csharp.Models;
 
-namespace BankManager_CLI
+namespace BankManager_Csharp_CLI
 {
+
+    class RunBankManagerCLI
+    {
+        public static void Main(String [] args)
+        {
+            new BankManagerCLI().run();
+        }
+    }
+
     class BankManagerCLI
     {
         private BankManager bankManager;
@@ -23,7 +31,21 @@ namespace BankManager_CLI
             if(answer == 1)
             {
                 username = promptString("Enter your username: ");
-                while(bankManager.checkAccountExists(username))
+                String password = promptString("Enter your password: ");
+
+                Response response = bankManager.authenticateUser(username, password);
+
+                Console.WriteLine(response.message);
+                if (response.isSuccessful == false)
+                {
+                    run();
+                }
+
+            }
+            else if (answer == 2)
+            {
+                username = promptString("Enter your username: ");
+                while (bankManager.checkAccountExists(username))
                 {
                     Console.WriteLine("Username already exists. Please choose a different username.");
                     username = promptString("Enter your username: ");
@@ -38,24 +60,11 @@ namespace BankManager_CLI
                 AccountResponse accountResponse = bankManager.createAccount(username, password, firstName, lastName, address);
 
                 Console.WriteLine(accountResponse.response.message);
-                if(accountResponse.response.isSuccessful == false)
+                if (accountResponse.response.isSuccessful == false)
                 {
                     run();
                 }
 
-            }
-            else if (answer == 2)
-            {
-                username = promptString("Enter your username: ");
-                String password = promptString("Enter your password: ");
-
-                Response response = bankManager.authenticateUser(username, password);
-
-                Console.WriteLine(response.message);
-                if(response.isSuccessful == false)
-                {
-                    run();
-                }
             } else if(answer ==3)
             {
                 Console.WriteLine("Have a great day! :)");
@@ -107,9 +116,19 @@ namespace BankManager_CLI
             }
             else if(answer == 3)
             {
-                ArrayList transaction = account.history;
+                List<Transaction> history = account.history;
+
+                foreach(Transaction transaction in history) {
+                    Console.WriteLine(transaction.prettyPrint());
+                }
+            }
+            else if(answer == 4)
+            {
+                Console.WriteLine("Logging out. Have a nice day! :)");
+                return;
             }
 
+            dashboard(username);
         }
 
         public int dashboardMenu()
@@ -173,7 +192,7 @@ namespace BankManager_CLI
             {
                 Console.Write(message);
                 answer = Console.ReadLine();
-            } while (answer != String.Empty);
+            } while (answer == String.Empty);
 
             return answer;
         }
