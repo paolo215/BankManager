@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
-namespace BankManager_Csharp.Models
+namespace BankManager_Csharp_CLI
 {
     public class Transaction
     {
@@ -40,7 +37,6 @@ namespace BankManager_Csharp.Models
                 + "Status: " + status + "\n"
                 + "Date: " + getReadableDate() + "\n";
         }
-
     }
 
 

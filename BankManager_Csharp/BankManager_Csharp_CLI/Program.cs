@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BankManager_CLI
+namespace BankManager_Csharp_CLI
 {
     class Program
     {
@@ -8,6 +8,5 @@ namespace BankManager_CLI
         {
             new BankManagerCLI().run();
         }
-
     }
 }

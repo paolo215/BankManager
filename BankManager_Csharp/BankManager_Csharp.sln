@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankManager_Csharp", "BankManager_Csharp\BankManager_Csharp.csproj", "{179E123D-D807-4800-908C-FD17D7E2F693}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BankManager_Csharp_CLI", "BankManager_Csharp_CLI\BankManager_Csharp_CLI.csproj", "{1CDA95C1-E8B9-41CD-8F3F-6A5C0281AF5D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{179E123D-D807-4800-908C-FD17D7E2F693}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{179E123D-D807-4800-908C-FD17D7E2F693}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{179E123D-D807-4800-908C-FD17D7E2F693}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CDA95C1-E8B9-41CD-8F3F-6A5C0281AF5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CDA95C1-E8B9-41CD-8F3F-6A5C0281AF5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CDA95C1-E8B9-41CD-8F3F-6A5C0281AF5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CDA95C1-E8B9-41CD-8F3F-6A5C0281AF5D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
