@@ -3,8 +3,8 @@
 
 # Python
 *pyc
-BankManagement_Python/.idea/
-BankManagement_Python/__pycache__/
+.idea/
+__pycache__/
 
 # C#
 *.user
@@ -12,3 +12,6 @@ BankManagement_Python/__pycache__/
 packages/
 obj/
 bin/
+*.exe
+Scripts/
+fonts/
