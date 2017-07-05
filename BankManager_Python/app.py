@@ -96,7 +96,9 @@ def register():
             message = response[1]
 
             if is_successful:
-                return redirect(url_for("dashboard", username=username))
+                session["is_authenticated"] = True
+                session["username"] = username
+                return redirect(url_for("dashboard"))
             else:
                 return render_template("register.html", message=message)
     except Exception as e:
@@ -116,6 +118,8 @@ def dashboard():
 
     # Obtain account information
     account = bank_manager.get_user_account(username)
+    if account == None:
+        return redirect(url_for("index"))
 
     try:
         # This is true when user clicks "Complete transaction" button
@@ -138,13 +142,13 @@ def dashboard():
     except Exception as e:
         error = e
 
-
     return render_template("dashboard.html", user_data=account.get_data(), message=error)
 
 
 @app.route("/logout")
 def logout():
     session["is_authenticated"] = False
+    session["username"] = None
     return index()
 
 
