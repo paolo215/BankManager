@@ -15,7 +15,6 @@ class TestBankManager(unittest.TestCase):
         self.assertTrue(is_successful)
         does_exists = self.bank_manager.check_account_exists("admin") 
         self.assertTrue(does_exists)
-        self.assertTrue(self.bank_manager.next_account_id == 2)
 
 
     def test_creating_an_account_that_already_exists(self):
