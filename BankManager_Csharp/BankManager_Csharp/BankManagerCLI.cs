@@ -25,7 +25,6 @@ namespace BankManager_Csharp_CLI
         public BankManagerCLI()
         {
             bankManager = new BankManager();
-            bankManager.createAccount("admin", "password", "Paolo", "Villanueva", "My address");
         }
 
 

@@ -16,11 +16,6 @@ namespace BankManager_Csharp
 
         protected void Application_Start()
         {
-            
-            // Create an account
-            bankManager.createAccount("admin", "password", "Paolo", "Villanueva", "My address");
-
-
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
