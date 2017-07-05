@@ -118,7 +118,7 @@ def dashboard():
 
     # Obtain account information
     account = bank_manager.get_user_account(username)
-    if account == None:
+    if account == None or session["is_authenticated"] == False:
         return redirect(url_for("index"))
 
     try:
