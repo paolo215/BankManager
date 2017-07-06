@@ -1,11 +1,12 @@
 # Bank_Sample
-# Requirements: 
+
+# IDE: 
 1. Visual Studio (I am using Visual Studio 2017)
 
 
 # Run command line interface:
 1. Navigate to Bank_Sample/BankManager_Csharp/BankManager_Csharp
-2. Run: `csc BankManagerCLI.cs Models/*cs
+2. Run: `csc BankManagerCLI.cs Models/*cs`
 3. Run: `BankManagerCLI.exe`
 
 # Run web gui 
