@@ -6,7 +6,7 @@
 
 
 
-<form action="/Login/Authorize" method="post">
+<form class="login-form" action="/Login/Authorize" method="post">
     Username:<input name="username" type="text" />
     <br />
     Password:<input name="password" type="password"/>
@@ -15,8 +15,9 @@
     <input type="submit" value="Log in" />
 </form>
 
-@Html.DisplayFor(model => model.message)
-
+<div id="message">
+    @Html.DisplayFor(model => model.message)
+</div>
 </html>
 
 

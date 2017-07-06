@@ -8,22 +8,22 @@
 <a href="/Dashboard/Logout">Log out</a>
 
 <br />
-Username: @Html.DisplayFor(model => model.account.username)
+Username: @Html.DisplayFor(model => model.account.username, new { @id = "username" })
 <br />
-First name: @Html.DisplayFor(model => model.account.firstName)
+First name: @Html.DisplayFor(model => model.account.firstName, new { @id = "first-name" })
 <br />
-Last name: @Html.DisplayFor(model => model.account.lastName)
+Last name: @Html.DisplayFor(model => model.account.lastName, new { @id = "last-name" })
 <br />
-Address: @Html.DisplayFor(model => model.account.address)
+Address: @Html.DisplayFor(model => model.account.address, new { @id = "address" })
 <br />
-Balance: @Html.DisplayFor(model => model.account.balance)
+Balance: @Html.DisplayFor(model => model.account.balance, new { @id = "balance" })
 <br />
 
 
 <br><br>
     Withdraw or deposit:
 <br>
-<form method="post" action="/Dashboard/MakeTransaction">
+<form class="dashboard-form" method="post" action="/Dashboard/MakeTransaction">
     <input type="number" name="amount" value="0" />
     <input name="option" type="radio" value="Withdraw" id="Withdraw" checked /> Withdraw
     <input name="option" type="radio" value="Deposit" id="Deposit" /> Deposit
@@ -33,28 +33,28 @@ Balance: @Html.DisplayFor(model => model.account.balance)
 
 @if (Model.response != null)
 {
-    @Html.DisplayFor(model => model.response.message)
+    @Html.DisplayFor(model => model.response.message, new { @id = "message" })
 }
 
 
 @foreach (BankManager_Csharp.Models.Transaction transaction in Model.account.history)
 {
-    @Html.Raw("<br><br>")
+    <br /><br />
     @Html.Raw("Transaction id: ")
     @Html.DisplayFor(_transaction => transaction.transactionId);
-    @Html.Raw("<br>");
+   <br />
     @Html.Raw("Account id: ")
     @Html.DisplayFor(_transaction => transaction.accountId);
-    @Html.Raw("<br>");
+    <br />
     @Html.Raw("Balance: ")
     @Html.DisplayFor(_transaction => transaction.balance);
-    @Html.Raw("<br>");
+    <br />
     @Html.Raw("Amount: ")
     @Html.DisplayFor(_transaction => transaction.amount);
-    @Html.Raw("<br>");
+    <br />
     @Html.Raw("Status: ")
     @Html.DisplayFor(_transaction => transaction.status);
-    @Html.Raw("<br>");
+    <br />
     @Html.Raw("Date: ")
     @Html.DisplayFor(_transaction => transaction.date);
     @Html.Raw("<br>");

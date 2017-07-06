@@ -5,20 +5,22 @@
 
 <h2>Index</h2>
 
-<form action="/Register/Create" method="post">
-    Username: <input type="text" name="username" value=@TempData["username"] ?? String.Empty required />
+<form class="register-form" action="/Register/Create" method="post">
+    Username: <input id="username" type="text" name="username" value=@TempData["username"] ?? String.Empty required />
     <br>
-    Password: <input type="password" name="password"  required />
+    Password: <input id="password" type="password" name="password"  required />
     <br>
-    First name: <input type="text" name="firstName" value=@TempData["firstName"] ?? String.Empty  required />
+    First name: <input id="first-name" type="text" name="firstName" value=@TempData["firstName"] ?? String.Empty  required />
     <br>
-    Last name: <input type="text" name="lastName" value=@TempData["lastName"] ?? String.Empty required />
+    Last name: <input id="last-name" type="text" name="lastName" value=@TempData["lastName"] ?? String.Empty required />
     <br>
-    Address: <input type="text" name="address" value=@TempData["address"] ?? String.Empty required />
+    Address: <input id="address" type="text" name="address" value=@TempData["address"] ?? String.Empty required />
     <input type="submit" value="Register" />
 </form>
 
 @if (Model != null)
 {
-    @Html.DisplayFor(model => model.message)
+    <div id="message">
+        @Html.DisplayFor(model => model.message)
+    </div>
 }
