@@ -16,5 +16,5 @@
 
 ## Option 2:
 1. Navigate to IIS Express `cd C:\Program Files\IIS Express`
-2. Execute iisexpress.exe and use the /path option to run the page `iisexpress /path:<path to application>
+2. Execute iisexpress.exe and use the /path option to run the page `iisexpress /path:<path to application>`
 
