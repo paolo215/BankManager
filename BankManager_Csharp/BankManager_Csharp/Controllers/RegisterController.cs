@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BankManager_Csharp.Models;
+using Newtonsoft.Json;
 
 namespace BankManager_Csharp.Controllers
 {
@@ -20,26 +21,44 @@ namespace BankManager_Csharp.Controllers
             return View("Index", null);
         }
 
-
-
-        public ActionResult Create(String username, String password, String firstName,
+        [HttpPost]
+        public String createAPI(String username, String password, String firstName,
             String lastName, String address)
         {
-
             AccountResponse accountResponse = MvcApplication.bankManager.createAccount(username,
                                         password, firstName, lastName, address);
 
+
+            if(accountResponse.response.isSuccessful == true)
+            {
+                Session["username"] = username;
+                Session["is_authenticated"] = true;
+            }
+
+            return JsonConvert.SerializeObject(accountResponse);
+        }
+
+
+        [HttpPost]
+        public ActionResult Create(String username, String password, String firstName,
+            String lastName, String address)
+        {
+            String result = createAPI(username, password, firstName, lastName, address);
+
+            System.Diagnostics.Debug.WriteLine(result);
+            AccountResponse accountResponse = JsonConvert.DeserializeObject<AccountResponse>(result);
+
+            
             if(accountResponse.response.isSuccessful == false)
             {
                 TempData["username"] = username;
                 TempData["firstName"] = firstName;
                 TempData["lastName"] = lastName;
                 TempData["address"] = address;
-                return View("Index", accountResponse.response);
+                return View("Index", accountResponse.response.message);
             }
 
-            Session["username"] = username;
-            Session["is_authenticated"] = true;
+            
 
             return RedirectToAction("Index", "Dashboard");
         }
