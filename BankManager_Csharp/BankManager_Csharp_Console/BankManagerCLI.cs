@@ -37,9 +37,18 @@ namespace BankManager_Csharp_Console
                     new KeyValuePair<String, String>("password", password),
                 });
 
-                Task<String> response = HttpUtility.Post(client, "/Login/authorizeAPI", loginForm);
+                Task<String> callback = HttpUtility.Post(client, "/Login/authorizeAPI", loginForm);
+                Response response = JsonConvert.DeserializeObject<Response>(callback.Result);
 
-                
+                // Display response from BankManager
+                Console.WriteLine(response.message);
+
+                // Return to main menu if account creation not sucessful
+                if (response.isSuccessful == false)
+                {
+                    run();
+                }
+
             }
 
             // User wants to create an account
@@ -65,7 +74,6 @@ namespace BankManager_Csharp_Console
                 });
 
                 Task<String> callback = HttpUtility.Post(client, "/Register/createAPI", registrationForm);
-
                 AccountResponse accountResponse = JsonConvert.DeserializeObject<AccountResponse>(callback.Result);
 
 
@@ -99,8 +107,6 @@ namespace BankManager_Csharp_Console
 
             String args = "?username=" + username;
             Task<String> callback = HttpUtility.Get(client, "/Dashboard/getAccountInfoAPI" + args);
-
-            Console.WriteLine(callback.Result);
             AccountResponse accountResponse = JsonConvert.DeserializeObject<AccountResponse>(callback.Result);
             Account account = accountResponse.account;
 
@@ -140,7 +146,6 @@ namespace BankManager_Csharp_Console
                     new KeyValuePair<String, String>("option", option)
                 });
                 callback = HttpUtility.Post(client, "/Dashboard/makeTransactionAPI", transactionForm);
-
                 accountResponse = JsonConvert.DeserializeObject<AccountResponse>(callback.Result);
 
                 Console.WriteLine(accountResponse.response.message);
@@ -160,6 +165,7 @@ namespace BankManager_Csharp_Console
             else if (answer == 4)
             {
                 Console.WriteLine("Logging out. Have a nice day! :)");
+                run();
                 return;
             }
 

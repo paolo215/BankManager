@@ -44,8 +44,6 @@ namespace BankManager_Csharp.Controllers
             String lastName, String address)
         {
             String result = createAPI(username, password, firstName, lastName, address);
-
-            System.Diagnostics.Debug.WriteLine(result);
             AccountResponse accountResponse = JsonConvert.DeserializeObject<AccountResponse>(result);
 
             
@@ -55,7 +53,7 @@ namespace BankManager_Csharp.Controllers
                 TempData["firstName"] = firstName;
                 TempData["lastName"] = lastName;
                 TempData["address"] = address;
-                return View("Index", accountResponse.response.message);
+                return View("Index", accountResponse.response);
             }
 
             

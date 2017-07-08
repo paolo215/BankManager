@@ -39,10 +39,10 @@ namespace BankManager_Csharp.Controllers
         [HttpGet]
         public String getAccountInfoAPI(String username)
         {
-            if(bool.Parse(Session["is_authenticated"].ToString()) == true && Session["username"].Equals(username))
+            if(Session["is_authenticated"] != null && bool.Parse(Session["is_authenticated"].ToString()) == true && Session["username"].Equals(username))
             {
                 Account account = MvcApplication.bankManager.getUserAccount(username);
-                Response response = new Models.Response(true, "Success!");
+                Response response = new Response(true, "Success!");
                 return JsonConvert.SerializeObject(new AccountResponse(account, response));
             }
 

@@ -27,7 +27,7 @@ namespace BankManager_Csharp.Controllers
         {
             Response response = MvcApplication.bankManager.authenticateUser(username, password);
 
-            if(response.isSuccessful == false)
+            if(response.isSuccessful == true)
             {
                 Session["username"] = username;
                 Session["is_authenticated"] = true;
@@ -47,11 +47,11 @@ namespace BankManager_Csharp.Controllers
             try
             {
                 Response response = JsonConvert.DeserializeObject<Response>(authorizeAPI(username, password));
-                System.Diagnostics.Debug.WriteLine(response.message);
                 if (response.isSuccessful == false)
                 {
                     return View("Index", response);
                 }
+
                 return RedirectToAction("Index", "Dashboard");
             }
 
