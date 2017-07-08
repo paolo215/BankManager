@@ -1,23 +1,23 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using BankManager_Csharp.Models;
 using System.Collections.Generic;
 
 namespace BankManager_Csharp_Test.Models
 {
-    [TestClass]
+    [TestFixture]
     public class AccountTest
     {
         public Account account;
 
 
-        [TestInitialize]
+        [SetUp]
         public void init()
         {
             account = new Account(1, "admin", "password", "Paolo", "Villanueva", "My address");
         }
 
-        [TestMethod]
+        [Test]
         public void withdrawingMoney()
         {
             account.balance = 100;
@@ -26,7 +26,7 @@ namespace BankManager_Csharp_Test.Models
             Assert.AreEqual(0, account.balance);
         }
 
-        [TestMethod]
+        [Test]
         public void depositMoney()
         {
             account.balance = 0;
@@ -35,7 +35,7 @@ namespace BankManager_Csharp_Test.Models
             Assert.AreEqual(100, account.balance);
         }
 
-        [TestMethod]
+        [Test]
         public void addTransaction()
         {
             DateTime now = DateTime.Now;
@@ -55,7 +55,7 @@ namespace BankManager_Csharp_Test.Models
 
         }
 
-        [TestMethod]
+        [Test]
         public void addTwoTransactions()
         {
             DateTime now = DateTime.Now;
