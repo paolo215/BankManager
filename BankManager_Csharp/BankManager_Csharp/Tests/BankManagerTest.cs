@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using BankManager_Csharp.Models;
 
-namespace BankManager_Csharp_Test.Models
+namespace BankManager_Csharp.Tests
 {
     [TestFixture]
     public class BankManagerTest
