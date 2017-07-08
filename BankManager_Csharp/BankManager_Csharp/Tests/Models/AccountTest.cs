@@ -3,7 +3,7 @@ using NUnit.Framework;
 using BankManager_Csharp.Models;
 using System.Collections.Generic;
 
-namespace BankManager_Csharp.Tests
+namespace BankManager_Csharp.Tests.Models
 {
     [TestFixture]
     public class AccountTest
