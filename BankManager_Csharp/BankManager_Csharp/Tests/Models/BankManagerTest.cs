@@ -1,24 +1,25 @@
 ﻿using System;
+using NUnit.Framework;
 using BankManager_Csharp.Models;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace BankManager_Csharp_Test.Models
+namespace BankManager_Csharp.Tests.Models
 {
-    [TestClass]
+    [TestFixture]
     public class BankManagerTest
     {
         public BankManager bankManager;
 
 
-        [TestInitialize]
+        [SetUp]
         public void init()
         {
             bankManager = new BankManager();
         }
-        [TestMethod]
+        [Test]
         public void createAnAccount()
         {
             AccountResponse accountResponse = bankManager.createAccount("Person1", "password", "first", "person", "address");
+            Console.WriteLine(accountResponse.response.message);
 
             Response response = accountResponse.response;
             Account account = accountResponse.account;
@@ -30,7 +31,7 @@ namespace BankManager_Csharp_Test.Models
 
         }
 
-        [TestMethod]
+        [Test]
         public void createTwoAccounts()
         {
             AccountResponse accountResponse = bankManager.createAccount("Person1", "password", "first", "person", "address");
@@ -43,6 +44,7 @@ namespace BankManager_Csharp_Test.Models
             Assert.IsTrue(account.accountId == 2);
         }
 
+        [Test]
         public void authenticateExistingUserButWithIncorrectPassword()
         {
             AccountResponse accountResponse = bankManager.createAccount("Person1", "password", "first", "person", "address");
@@ -51,20 +53,22 @@ namespace BankManager_Csharp_Test.Models
 
         }
 
+        [Test]
         public void authenticateNonExistingUser()
         {
             Response response = bankManager.authenticateUser("Tester", "password");
             Assert.IsFalse(response.isSuccessful);
         }
 
+        [Test]
         public void authenticateExistingUserWithCorrectPassword()
         {
             AccountResponse accountResponse = bankManager.createAccount("Person1", "password", "first", "person", "address");
             Response response = bankManager.authenticateUser("Person1", "password");
             Assert.IsTrue(response.isSuccessful);
         }
-        
 
+        [Test]
         public void createTransactions()
         {
             AccountResponse accountResponse = bankManager.createAccount("Person1", "password", "first", "person", "address");

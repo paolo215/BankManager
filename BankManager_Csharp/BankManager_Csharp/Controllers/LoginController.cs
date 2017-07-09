@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BankManager_Csharp.Models;
+using Newtonsoft.Json;
 
 namespace BankManager_Csharp.Controllers
 {
@@ -22,21 +23,35 @@ namespace BankManager_Csharp.Controllers
 
 
         [HttpPost]
+        public String authorizeAPI(String username, String password)
+        {
+            Response response = MvcApplication.bankManager.authenticateUser(username, password);
+
+            if(response.isSuccessful == true)
+            {
+                Session["username"] = username;
+                Session["is_authenticated"] = true;
+            }
+
+
+            return JsonConvert.SerializeObject(response);
+
+            
+        }
+
+
+        [HttpPost]
         public ActionResult Authorize(String username, String password)
         {
             String error = "";
             try
             {
-                Response response = MvcApplication.bankManager.authenticateUser(username, password);
-                System.Diagnostics.Debug.WriteLine(response.message);
+                Response response = JsonConvert.DeserializeObject<Response>(authorizeAPI(username, password));
                 if (response.isSuccessful == false)
                 {
                     return View("Index", response);
                 }
 
-
-                Session["username"] = username;
-                Session["is_authenticated"] = true;
                 return RedirectToAction("Index", "Dashboard");
             }
 
