@@ -14,7 +14,7 @@ namespace BankManager_Csharp.Tests.Models
         [SetUp]
         public void init()
         {
-            account = new Account(1, "admin", "password", "Paolo", "Villanueva", "My address");
+            account = new Account("admin", "password", "Paolo", "Villanueva", "My address");
         }
 
         [Test]
@@ -40,7 +40,7 @@ namespace BankManager_Csharp.Tests.Models
         {
             DateTime now = DateTime.Now;
 
-            Transaction transaction = new Transaction(1, account.accountId, 100, 100, "WITHDRAW", now);
+            Transaction transaction = new Transaction(account.accountId, 100, 100, "WITHDRAW", now);
 
             account.addTransaction(transaction);
 
@@ -60,7 +60,7 @@ namespace BankManager_Csharp.Tests.Models
         {
             DateTime now = DateTime.Now;
 
-            Transaction transaction1 = new Transaction(1, account.accountId, 100, 100, "WITHDRAW", now);
+            Transaction transaction1 = new Transaction(account.accountId, 100, 100, "WITHDRAW", now);
 
             account.addTransaction(transaction1);
 
@@ -74,7 +74,7 @@ namespace BankManager_Csharp.Tests.Models
             Assert.IsTrue(addedTransaction1.date.Equals(now));
 
 
-            Transaction transaction2 = new Transaction(2, account.accountId, 100, 100, "DEPOSIT", now);
+            Transaction transaction2 = new Transaction(account.accountId, 100, 100, "DEPOSIT", now);
             account.addTransaction(transaction2);
 
             Transaction addedTransaction2 = account.history[1];

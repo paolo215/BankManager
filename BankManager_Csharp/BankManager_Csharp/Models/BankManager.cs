@@ -51,7 +51,7 @@ namespace BankManager_Csharp.Models
             {
                 // Creates an account for the user, since we didn't find an existing account with that username.
                 int accountId = accountData.Count + 1;
-                account = new Account(accountId, username, password, firstName, lastName, address);
+                account = new Account(username, password, firstName, lastName, address);
                 accountData[username] = account;
                 
 
@@ -60,7 +60,7 @@ namespace BankManager_Csharp.Models
             }
 
             // Username already exists. 
-            account = new Account(-1, username, null, firstName, lastName, address);
+            account = new Account(username, null, firstName, lastName, address);
             return new AccountResponse(account, new Response(false, "Username already exists. Try again."));
         }
 
@@ -122,14 +122,13 @@ namespace BankManager_Csharp.Models
         /// <returns></returns>
         public Transaction createTransaction(Account account, int amount, String status)
         {
-            float balance = account.balance;
+            double balance = account.balance;
             int accountId = account.accountId;
             DateTime date = DateTime.Now;
 
             int transactionId = transactionData.Count + 1;
             // Creates transaction
-            Transaction transaction = new Transaction(transactionId,
-                accountId, balance, amount, status, date);
+            Transaction transaction = new Transaction(accountId, balance, amount, status, date);
 
 
             // Record transaction
@@ -147,7 +146,7 @@ namespace BankManager_Csharp.Models
         /// <returns>Response</returns>
         public Response withdraw(Account account, int amount)
         {
-            float balance = account.balance;
+            double balance = account.balance;
 
             // Validates amount of funds the user wants to withdraw.
             // Rules: 
@@ -173,7 +172,7 @@ namespace BankManager_Csharp.Models
         /// <returns>Response</returns>
         public Response deposit(Account account, int amount)
         {
-            float balance = account.balance;
+            double balance = account.balance;
             // Validates the amount of money the user wants to deposit
             // Rule:
             //    User should not be able to depist 0 funds.
