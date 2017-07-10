@@ -135,7 +135,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="BankManagerCLI.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -164,6 +163,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BankManagerDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\DBManager.cs" />
     <Compile Include="Models\Response.cs" />
     <Compile Include="Models\tra.cs" />
     <Compile Include="Models\Transaction.cs">

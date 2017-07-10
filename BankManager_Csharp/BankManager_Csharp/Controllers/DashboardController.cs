@@ -64,7 +64,12 @@ namespace BankManager_Csharp.Controllers
                 response = MvcApplication.bankManager.deposit(account, amount);
             }
 
-            return JsonConvert.SerializeObject(new AccountResponse(account, response));
+
+            return JsonConvert.SerializeObject(new AccountResponse(account, response),
+                Formatting.None, new JsonSerializerSettings()
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                });
         }
 
 

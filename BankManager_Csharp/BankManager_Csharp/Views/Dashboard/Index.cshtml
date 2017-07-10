@@ -37,7 +37,7 @@ Balance: @Html.DisplayFor(model => model.account.balance, new { @id = "balance" 
 }
 
 
-@foreach (BankManager_Csharp.Models.Transaction transaction in Model.account.history)
+@foreach (BankManager_Csharp.Models.Transaction transaction in Model.account.Transactions)
 {
     <br /><br />
     @Html.Raw("Transaction id: ")

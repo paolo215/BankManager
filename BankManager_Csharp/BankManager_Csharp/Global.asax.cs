@@ -16,9 +16,6 @@ namespace BankManager_Csharp
 
         protected void Application_Start()
         {
-            BankManagerDBEntities db = new BankManagerDBEntities();
-            db.Transactions.Add(new Transaction(1, 1, 1, "a", DateTime.Now));
-            db.Accounts.Add(new Account( "a", "a", "a", "a", "a"));
 
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
