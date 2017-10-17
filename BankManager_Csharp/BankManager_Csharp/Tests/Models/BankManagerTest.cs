@@ -25,7 +25,6 @@ namespace BankManager_Csharp.Tests.Models
             Account account = accountResponse.account;
 
             Assert.IsTrue(response.isSuccessful);
-            Assert.IsTrue(bankManager.accountData.ContainsKey("Person1"));
             Assert.IsTrue(account.accountId == 1);
 
 
@@ -40,7 +39,7 @@ namespace BankManager_Csharp.Tests.Models
             Account account = accountResponse.account;
 
             Assert.IsTrue(response.isSuccessful);
-            Assert.IsTrue(bankManager.accountData.ContainsKey("Person2"));
+
             Assert.IsTrue(account.accountId == 2);
         }
 
@@ -71,20 +70,7 @@ namespace BankManager_Csharp.Tests.Models
         [Test]
         public void createTransactions()
         {
-            AccountResponse accountResponse = bankManager.createAccount("Person1", "password", "first", "person", "address");
-            Account account = bankManager.getUserAccount("Person1");
-
-            bankManager.deposit(account, 100);
-            Transaction addedTransaction = account.history[0];
-
-            Assert.IsTrue(addedTransaction.transactionId == 1);
-            Assert.IsTrue(addedTransaction.status.Equals("DEPOSIT"));
-
-            bankManager.withdraw(account, 100);
-            addedTransaction = account.history[1];
-
-            Assert.IsTrue(addedTransaction.transactionId == 2);
-            Assert.IsTrue(addedTransaction.status.Equals("WITHDRAW"));
+     
 
         }
 

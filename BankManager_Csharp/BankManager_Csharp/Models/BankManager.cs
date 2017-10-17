@@ -7,28 +7,14 @@ namespace BankManager_Csharp.Models
 {
     public class BankManager
     {
-        /// <summary>
-        /// Used to store bank accounts.
-        /// Key = Username (String)
-        /// Value = Bank account (Account)
-        /// </summary>
-        public Dictionary<String, Account> accountData;
-
-        /// <summary>
-        /// Used to store completed transactions.
-        /// Key = Transaction id (int)
-        /// Value = Transaction information (Transaction)
-        /// </summary>
-        public Dictionary<int, Transaction> transactionData;
-
+        public DBManager dbManager;
 
         /// <summary>
         /// Instantiates BankManager. This handles account creation, showing transaction history of the user, deposits, and withdraws.
         /// </summary>
         public BankManager()
         {
-            accountData = new Dictionary<String, Account>();
-            transactionData = new Dictionary<int, Transaction>();
+            dbManager = new DBManager();
         }
 
         /// <summary>
@@ -50,9 +36,8 @@ namespace BankManager_Csharp.Models
             if (checkAccountExists(username) == false)
             {
                 // Creates an account for the user, since we didn't find an existing account with that username.
-                int accountId = accountData.Count + 1;
-                account = new Account(accountId, username, password, firstName, lastName, address);
-                accountData[username] = account;
+                account = new Account(username, password, firstName, lastName, address);
+                dbManager.addAccount(account);
                 
 
                 return new AccountResponse(account, new Response(true, "Success! A new account has been created."));
@@ -60,7 +45,7 @@ namespace BankManager_Csharp.Models
             }
 
             // Username already exists. 
-            account = new Account(-1, username, null, firstName, lastName, address);
+            account = new Account(username, null, firstName, lastName, address);
             return new AccountResponse(account, new Response(false, "Username already exists. Try again."));
         }
 
@@ -78,7 +63,7 @@ namespace BankManager_Csharp.Models
                 return new Response(false, "Incorrect username or password. Try again.");
             }
 
-            Account account = accountData[username];
+            Account account = dbManager.getAccount(username);
             // Check if the user input password and stored password are the same
             if(account.password.Equals(password))
             {
@@ -96,7 +81,8 @@ namespace BankManager_Csharp.Models
             {
                 return null;
             }
-            return accountData[username];
+            Account account = dbManager.getAccount(username);
+            return account;
         }
 
         /// <summary>
@@ -106,7 +92,7 @@ namespace BankManager_Csharp.Models
         /// <returns>bool</returns>
         public bool checkAccountExists(String username)
         {
-            if(accountData.ContainsKey(username) == false)
+            if(dbManager.checkAccountExists(username) == false)
             {
                 return false;
             }
@@ -122,19 +108,16 @@ namespace BankManager_Csharp.Models
         /// <returns></returns>
         public Transaction createTransaction(Account account, int amount, String status)
         {
-            float balance = account.balance;
+            double balance = account.balance;
             int accountId = account.accountId;
             DateTime date = DateTime.Now;
 
-            int transactionId = transactionData.Count + 1;
             // Creates transaction
-            Transaction transaction = new Transaction(transactionId,
-                accountId, balance, amount, status, date);
+            Transaction transaction = new Transaction(accountId, balance, amount, status, date);
 
 
             // Record transaction
-            transactionData[transactionId] = transaction;
-            account.addTransaction(transaction);
+            dbManager.addTransaction(transaction);
 
             return transaction;
         }
@@ -147,7 +130,7 @@ namespace BankManager_Csharp.Models
         /// <returns>Response</returns>
         public Response withdraw(Account account, int amount)
         {
-            float balance = account.balance;
+            double balance = account.balance;
 
             // Validates amount of funds the user wants to withdraw.
             // Rules: 
@@ -158,6 +141,7 @@ namespace BankManager_Csharp.Models
                 // Withdraws money from the account and records transaction.
                 account.withdraw(amount);
                 createTransaction(account, amount, "WITHDRAW");
+                dbManager.updateFunds(account);
 
                 return new Response(true, "Success! Your balance is now: " + account.balance);
             }
@@ -173,7 +157,7 @@ namespace BankManager_Csharp.Models
         /// <returns>Response</returns>
         public Response deposit(Account account, int amount)
         {
-            float balance = account.balance;
+            double balance = account.balance;
             // Validates the amount of money the user wants to deposit
             // Rule:
             //    User should not be able to depist 0 funds.
@@ -182,6 +166,8 @@ namespace BankManager_Csharp.Models
                 // Deposits funds to user's account and records transaction.
                 account.deposit(amount);
                 createTransaction(account, amount, "DEPOSIT");
+                dbManager.updateFunds(account);
+                
 
                 return new Response(true, "Success! Your balance is now: " + account.balance);
             }
